@@ -1,0 +1,12 @@
+header h2 a {
+    color: red;
+    
+    
+    }
+header {
+        border-bottom: 1px solid #999;
+        margin-bottom : 5rem;
+        display: flex;
+        text-align: center;
+        
+        }
