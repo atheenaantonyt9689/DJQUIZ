@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
@@ -20,3 +21,8 @@ class Choice(models.Model):
     question_field =models.ForeignKey('Question',on_delete = models.CASCADE,)
     def __str__(self):
         return self.choice_text
+
+class CustomUser(AbstractUser):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    age = models.PositiveIntegerField(null=True,blank=True)

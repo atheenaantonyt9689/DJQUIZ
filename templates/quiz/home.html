@@ -1,6 +1,15 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
+{% if user.is_authenticated %}
+Hi {{ user.username }}!
+<p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a> |
+<a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+
 <div class="container mt-20">
   <div class="starter-template">
     <blockquote class="blockquote mt-20px ml-4 ">
@@ -33,7 +42,7 @@
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title"></h5>
+                            <h5 class="card-title">{{post.title}}</h5>
                             <p class="card-text">dmdcnd</p>
                             
                         </div>
