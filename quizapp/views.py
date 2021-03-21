@@ -11,14 +11,14 @@ class HomePageView(ListView):
 
 class QuizDetailView(DetailView):
     model = Quiz
-    template_name= 'quiz/science.html'
+    template_name= 'quiz/questions.html'
 
 class question_detailView(DetailView):
     model = Question
-    template_name = 'quiz/science.html'
+    template_name = 'quiz/questions.html'
 class choice(DetailView):
     model = Choice
-    template_name = 'quiz/science.html'
+    template_name = 'quiz/questions.html'
 
 class SignUpView(CreateView):
 

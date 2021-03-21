@@ -21,7 +21,7 @@ Hi {{ user.username }}!
         <div class="card-body">
           {% for post in object_list %}
           <ul class="list-unstyled">
-            <li> <a href="{% url 'science' post.pk %}">{{ post.title }}</a></li>
+            <li> <a href="{% url 'questions' post.pk %}">{{ post.title }}</a></li>
 
           </ul>
 

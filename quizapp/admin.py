@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Quiz,Question,Choice,CustomUser
+from .models import Quiz,Question,Choice,CustomUser,Answer
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm,CustomUserChangeForm
 
@@ -7,6 +7,8 @@ from .forms import CustomUserCreationForm,CustomUserChangeForm
 admin.site.register(Quiz)
 admin.site.register(Question)
 admin.site.register(Choice)
+admin.site.register(Answer)
+
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm

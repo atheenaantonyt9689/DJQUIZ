@@ -24,6 +24,6 @@ urlpatterns = [
 
     #path('accounts/',include('django.contrib.auth.urls')),
     #path('accounts/',include('accounts.urls')),
-   # path('',include('quizapp.urls'))
-   path('',TemplateView.as_view(template_name='quiz/home.html'),name='home')
+    path('',include('quizapp.urls')),
+   #path('',TemplateView.as_view(template_name='quiz/home.html'),name='home')
 ]
