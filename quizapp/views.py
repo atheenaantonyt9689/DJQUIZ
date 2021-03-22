@@ -25,3 +25,14 @@ class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'quiz/signup.html'
+
+#fun for start-quiz
+
+#class StartQuiz(DetailView):
+    #model = Answer
+    #template_name = 'quiz/quiz_start.html'"""
+
+class StartQuiz(DetailView):
+    model = Quiz
+    template_name = "quiz/quiz_start.html"
+    
