@@ -14,11 +14,16 @@
       <p class="card-text"></p>
       <br>
       <br>
-      <div>
-        <center><button type="button" class="btn btn-success btn-lg">Start This Quiz</a></button></center>
-      </div>
-      <br><br><br>
-      <div>
+  
+      {% for question in object.question_set.all  %}
+        
+        <center><a href={% url 'quiz_start' question.pk %}><button type="button" class="btn btn-success btn-lg">Start This Quiz</button></a></center>
+    
+    
+     
+       
+        {% endfor %}
+        <br><br><br>
         <br>
 
         <p class="card-text ">You have 30 seconds to answer each question. The faster you answer, the higher your score.

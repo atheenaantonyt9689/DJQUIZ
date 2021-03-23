@@ -2,28 +2,41 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"/>
-<div class="container">
-  
-  <div class="card">
-    
-    
-    <div class="card-header text-black" style="background-color: #22aaa349;">
-      <!--center><h2>{{quiz.category}}</h2--></center>
-    </div>
-    <div class="card-header text-black" style="background-color: #22aaa349;">
-      <center><h2>{{quiz.category}}</h2></center>
-    </div>
-    <div class="card-body">
-      {% for q in object.question_set.all  %}
-     
-      <h4 class="card-title"></h4>
-      <p class="card-text">{{choice.question_field}}</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-      {% endfor  %}
-    </div>
-    
+
+<div class="card" style="width: 50%;height: 50%;">
+  <img class="card-img-top" src="{{quiz.image}}" alt="Card image cap">
+  <div class="card-body">
+    <h3 class="card-title">{{question.question_text}}</h3>
+    <p class="card-text">{{quiz.category}}</p>
   </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+    <label class="form-check-label" for="defaultCheck1">
+      Default checkbox
+    </label>
+  </div>
+  <form action="" method="post">
+    {% for question in object.choice_set.all  %}
+        <input type="checkbox" value="{{question.id}}" name="choice">
+        {{ item.choice_text}}
+    {% endfor %}
+    
+</form>
+  
+  
+  <form action="">
+    <input type="checkbox" id="vehicle1" name="choice_text" value="Bike">
+    <label for="vehicle1"> {{choice.choice_text}}</label><br>
+    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+    <label for="vehicle2"> I have a car</label><br>
+    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3"> I have a boat</label><br><br>
+    <input type="submit" value="Submit">
+  </form>
+  <div class="card-body">
+    
+    <a href="#" class="pager"><button type="button" class="btn btn-primary btn-lg">Previous</button></a>
+    <a href="#" class="pager"><button type="button" class="btn btn-primary btn-lg">Next</button></a>
 </div>
 
   

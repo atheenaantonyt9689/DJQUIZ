@@ -14,9 +14,9 @@ class QuizDetailView(DetailView):
     model = Quiz
     template_name= 'quiz/questions.html'
 
-class question_detailView(DetailView):
+class QuestionDetailView(DetailView):
     model = Question
-    template_name = 'quiz/questions.html'
+    template_name = 'quiz/quiz_start.html'
 
 class SignUpView(CreateView):
 
@@ -26,9 +26,9 @@ class SignUpView(CreateView):
 
 
 #start quiz
-#class StartQuiz(DetailView):
- #   model = Quiz
-  #  template_name = "quiz/quiz_start.html"
+class StartQuiz(DetailView):
+   model = Quiz
+   template_name = "quiz/quiz_start.html"
 #detailed view - Questions
 #class Questiondetailview(DetailView):
  #   model = Question
