@@ -19,14 +19,16 @@ Hi {{ user.username }}!
       <div class="post-entry">
 
         <div class="card-body">
-          {% for post in object_list %}
+          {% for quiz in object_list %}
           <ul class="list-unstyled">
-            <li> <a href="{% url 'questions' post.pk %}">{{ post.title }}</a></li>
+            <li> <a href="{% url 'questions' quiz.pk %}">{{ quiz.title}}</a></li>
+            
 
           </ul>
+          {% endfor %}
 
         </div>
-        {% endfor %}
+        
       </div>
     </div>
 
@@ -34,27 +36,7 @@ Hi {{ user.username }}!
 
   </div>
 </div>
-<section>
-        <div class="container mt-5">
-            <div class="row">
-                
-                <div class="class col-md-3">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">{{post.title}}</h5>
-                            <p class="card-text">dmdcnd</p>
-                            
-                        </div>
-                        
-                    </div>
-                
-                </div>
-                
 
-            </div>
-        </div>
-    </section>
 
 
 {% endblock content %}

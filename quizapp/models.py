@@ -10,21 +10,18 @@ class Quiz(models.Model):
        
     def __str__(self):
         return self.title
-    #def get_absolute_url(self): 
-       # return reverse('questions', args=[str(self.id)])
+    def get_absolute_url(self):
+        return reverse('questions', args=[str(self.id)])
 
 
-class Question(models.Model):
-
-    
+class Question(models.Model):    
     question_text = models.CharField(max_length=220)
     quiz = models.ForeignKey('Quiz',on_delete=models.CASCADE)
     correct_choice = models. ForeignKey('Choice',on_delete=models.CASCADE,blank=True,null=True) 
-    
     def __str__(self):
         return self.question_text
-    def get_absolute_url(self): 
-        return reverse('questions', args=[str(self.id)])
+    #def get_absolute_url(self): 
+        #return reverse('questions', args=[str(self.id)])
     
 class Choice(models.Model):
     choice_text = models.TextField()

@@ -4,15 +4,25 @@
 {% block content %}
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"/>
 <div class="container">
+  
   <div class="card">
-    <div class="card-header text-white" style="background-color: #22aaa349;">
-      Featured
+    
+    
+    <div class="card-header text-black" style="background-color: #22aaa349;">
+      <!--center><h2>{{quiz.category}}</h2--></center>
+    </div>
+    <div class="card-header text-black" style="background-color: #22aaa349;">
+      <center><h2>{{quiz.category}}</h2></center>
     </div>
     <div class="card-body">
-      <h4 class="card-title">{{ }}</h4>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      {% for q in object.question_set.all  %}
+     
+      <h4 class="card-title"></h4>
+      <p class="card-text">{{choice.question_field}}</p>
       <a href="#" class="btn btn-primary">Go somewhere</a>
+      {% endfor  %}
     </div>
+    
   </div>
 </div>
 

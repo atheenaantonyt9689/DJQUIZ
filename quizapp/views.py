@@ -3,11 +3,12 @@
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views.generic import ListView,DetailView,CreateView
-from .models import Quiz,Question,Choice
+from .models import Quiz,Question
 from .forms import CustomUserCreationForm
 class HomePageView(ListView):
     model = Quiz
     template_name = 'quiz/home.html'
+
 
 class QuizDetailView(DetailView):
     model = Quiz
@@ -16,9 +17,6 @@ class QuizDetailView(DetailView):
 class question_detailView(DetailView):
     model = Question
     template_name = 'quiz/questions.html'
-class choice(DetailView):
-    model = Choice
-    template_name = 'quiz/questions.html'
 
 class SignUpView(CreateView):
 
@@ -26,13 +24,20 @@ class SignUpView(CreateView):
     success_url = reverse_lazy('login')
     template_name = 'quiz/signup.html'
 
-#fun for start-quiz
 
+#start quiz
 #class StartQuiz(DetailView):
-    #model = Answer
-    #template_name = 'quiz/quiz_start.html'"""
+ #   model = Quiz
+  #  template_name = "quiz/quiz_start.html"
+#detailed view - Questions
+#class Questiondetailview(DetailView):
+ #   model = Question
+  #  template_name = 'quiz/quiz_start.html'
 
-class StartQuiz(DetailView):
-    model = Quiz
-    template_name = "quiz/quiz_start.html"
+#class ChoiceQ(DetailView):
+  #  model = Choice
+   # template_name = 'quiz/quiz_start.html
+    
+
+
     
