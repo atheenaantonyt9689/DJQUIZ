@@ -21,14 +21,14 @@ Hi {{ user.username }}!
         <div class="card-body">
           {% for quiz in object_list %}
           <ul class="list-unstyled">
-            <li> <a href="{% url 'questions' quiz.pk %}">{{ quiz.title}}</a></li>
-            
+            <li> <a href="{% url 'quiz_detail' quiz.pk %}">{{ quiz.title}}</a></li>
+
 
           </ul>
           {% endfor %}
 
         </div>
-        
+
       </div>
     </div>
 

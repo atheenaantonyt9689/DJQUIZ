@@ -3,6 +3,7 @@ from .views import (
     HomePageView,
     AnswerCreateView,
     QuizDetailView,
+    AltQuizDetailView,
     QuestionDetailView,
     SignUpView,
     StartQuiz,
@@ -22,6 +23,7 @@ urlpatterns = [
         AnswerCreateView.as_view(),
         name="answer_create",
     ),
-    path("quizzes/<int:pk>/", QuizDetailView.as_view(), name="quiz_detail"),
+    # path("quizzes/<int:pk>/", QuizDetailView.as_view(), name="quiz_detail"),
+    path("quizzes/<int:id>/", AltQuizDetailView.as_view(), name="quiz_detail"),
     path("", HomePageView.as_view(), name="home"),
 ]
