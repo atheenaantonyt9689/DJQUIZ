@@ -57,6 +57,12 @@ class SignUpView(CreateView):
     template_name = "quiz/signup.html"
 
 
+
+
+
+
+
+
 # start quiz
 class StartQuiz(DetailView):
     model = Quiz

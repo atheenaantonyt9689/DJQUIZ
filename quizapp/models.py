@@ -9,11 +9,12 @@ class Quiz(models.Model):
     image = models.CharField(max_length=220)
 
     def __str__(self):
-        return self.title
+       return self.title
 
 
 # quiz.question_set
 class Question(models.Model):
+    
     question_text = models.CharField(max_length=220)
     quiz = models.ForeignKey("Quiz", on_delete=models.CASCADE)
     correct_choice = models.ForeignKey(
