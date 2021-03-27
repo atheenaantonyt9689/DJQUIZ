@@ -1,0 +1,26 @@
+[
+    {
+        "model": "quizapp.Quiz",
+        "pk": 1,
+        "fields": {
+            "title": "ENGLISH",
+            "category": "STOREIS",
+            "image": "https://images-na.ssl-images-amazon.com/images/I/51gla7R5HFL._SX351_BO1,204,203,200_.jpg"
+        }
+    },
+    {
+        "model": "quizapp.Quiz",
+        "pk": 2,
+        "fields": {
+            "title": "MALYALAM",
+            "category": "STOREIS",
+            "image": "https://m.media-amazon.com/images/I/51mQ81dexWL.jpg"
+        }
+        
+    
+
+          
+         
+        
+    }
+]
