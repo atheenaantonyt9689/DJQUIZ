@@ -5,6 +5,7 @@ from .views import (
     QuizDetailView,
     AltQuizDetailView,
     QuestionDetailView,
+    FinishQuizView,
     SignUpView,
     StartQuiz,
 )
@@ -22,6 +23,11 @@ urlpatterns = [
         "quizzes/<int:quiz_id>/questions/<int:pk>/answers",
         AnswerCreateView.as_view(),
         name="answer_create",
+    ),
+    path(
+        "quizzes/<int:pk>/finish",
+        FinishQuizView.as_view(),
+        name="finish_quiz",
     ),
     # path("quizzes/<int:pk>/", QuizDetailView.as_view(), name="quiz_detail"),
     path("quizzes/<int:id>/", AltQuizDetailView.as_view(), name="quiz_detail"),

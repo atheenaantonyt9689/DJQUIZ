@@ -16,11 +16,13 @@
             "category": "STOREIS",
             "image": "https://m.media-amazon.com/images/I/51mQ81dexWL.jpg"
         }
-        
-    
-
-          
-         
-        
+    },
+    {
+        "model": "quizapp.Question",
+        "pk": 1,
+        "fields": {
+            "question_text": "Who is the father of malayalam?",
+            "quiz": 1
+        }
     }
 ]

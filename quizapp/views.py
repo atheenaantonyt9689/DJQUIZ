@@ -22,6 +22,29 @@ class QuizDetailView(DetailView):
     template_name = "quiz/quiz_detail.html"
 
 
+class FinishQuizView(View):
+    def post(self, request, *args, **kwargs):
+        # TODO
+        quiz_id = kwargs.get("pk")
+        quiz = Quiz.objects.get(id=quiz_id)
+        template_name = "quiz/finish_quiz.html"
+        # question_id_list = [3,5,6,7,10,11]
+        selected_answers = {
+            3: "Trivandrum",
+            5: "Chennai",
+            6: "Belgaum",
+        }
+
+        correct_answers = {
+            3: "Trivandrum",
+            5: "Chennai",
+            6: "Bangalore",
+        }
+
+        context = {"quiz": quiz, "selected_answers": {}, "correct_answers": {}}
+        return render(request, template_name, context)
+
+
 class AltQuizDetailView(View):
     def get(self, request, *args, **kwargs):
         print("args, kwargs", args, kwargs)
@@ -52,22 +75,24 @@ class QuestionDetailView(View):
         answered_choice = Answer.objects.filter(
             user_id=request.user.id, question_id=question_id
         ).last()
-        #previous_question =
+        # previous_question =
 
         template_name = "quiz/question_detail.html"
         context = {
             "quiz": quiz,
             "question": question,
             "answered_choice": answered_choice,
-            "previous": 1,  # TODO
-            "next": 1,  # TODO
+            "previous": previous_question_id,  # TODO
+            "next": next_question_id,  # TODO
+            "next_disabled": next_question_disabled,
+            "previous_disabled": previous_question_disabled,
         }
         return render(request, template_name, context)
 
 
-class AnswerCreateView(LoginRequiredMixin,View):
+class AnswerCreateView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
-        
+
         print("CURRENT User", request.user.id)
 
         selected_choice = request.POST.get("answer_choice")
@@ -80,12 +105,10 @@ class AnswerCreateView(LoginRequiredMixin,View):
             messages.warning(request, "Please select atleast one choice!")
             return redirect("question_detail", quiz_id=quiz_id, pk=question_id)
 
-        print("question-id", question_id)
-
         quiz = Quiz.objects.get(id=quiz_id)
         # question = Question.objects.get(id=question_id)
 
-        print("Post", selected_choice, ", ")
+        print("Selected Choice", selected_choice, ", ")
 
         # TODO Create and save answer
         answer = Answer(
@@ -99,10 +122,8 @@ class AnswerCreateView(LoginRequiredMixin,View):
             question.id
             for question in Question.objects.filter(quiz_id=quiz_id).order_by("id")
         ]
-        print("All Questions of Quiz:", quiz_id, "##", questions)
 
         next_question_id = question_id
-        last_question = False
 
         try:
             qindex = questions.index(int(question_id))
@@ -118,43 +139,7 @@ class AnswerCreateView(LoginRequiredMixin,View):
 
         print("Next question id", next_question_id)
 
-        next_question = Question.objects.get(id=next_question_id)
-
-        template_name = "quiz/question_detail.html"
-        context = {
-            "quiz": quiz,
-            "question": next_question,
-            "last_question": last_question,
-            "previous": 1,
-            "next": 1,
-        }
-        return render(request, template_name, context)
-
-
-
-
-
-
-
-    """model= Answer
-    template_name='question_detail.html'
-    fields=('selected_choice')
-    login_url = 'login' 
-
-    def form_valid(self, form):# new
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-    def dispatch(self, request, *args, **kwargs): # new
-        self.object = self.get_object()
-
-        obj = self.get_object()
-        if obj.author != self.request.user:
-         raise PermissionDenied
-        return super().dispatch(request, *args, **kwargs)"""
-
-    
-
+        return redirect("question_detail", quiz_id=quiz_id, pk=next_question_id)
         # return render()
 
 

@@ -1,0 +1,37 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="container mt-50 pt-6 ml-4">
+
+  <h3>{{ quiz.title }}</h3>
+  <div><span class='badge badge-primary badge-md'>{{quiz.category}}</span></div>
+
+  <div class='row mt-2'>
+    <div class='col-md-6'>
+      <div class="card">
+        <img src="{{quiz.image}}" class="card-img" alt="">
+
+        <div class="card-body">
+
+          <p class="card-text ">
+            Congratulations! You have completed the quiz.</p>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-6'>
+      <h4 class='border-bottom mb-3'>Question List</h4>
+      {% for question in quiz.question_set.all %}
+      <div>
+        <h5>{{ question.question_text }}</h5>
+        <p><b>Correct Answer: </b> {{correct_answers[question.id]}}, <b>Selected Answer: </b> ABCD</p>
+      </div>
+      {% endfor %}
+    </div>
+
+
+  </div>
+
+
+</div>
+
+{% endblock content %}

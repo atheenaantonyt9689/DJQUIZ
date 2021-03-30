@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<div class="card" style="width: 50%;height: 50%;">
-  <img class="card-img-top" src="{{quiz.image}}" alt="Card image cap">
+<div class="card" style="width: 50%;height: 50%; margin-bottom: 300px;">
+  <img class="card-img-top" src="{{quiz.image}}" alt="Card image cap" style="background-size: cover; height:200px;">
 
   <div class="card-body">
     <h3 class="card-title">{{question.question_text}}</h3>
@@ -47,18 +47,43 @@
       {% endif %}
 
       <div class="mt-3">
-        <a href="{% url 'question_detail' quiz_id=question.quiz_id pk=previous %}" class="pager"><button type="button"
-            class="btn btn-primary btn-lg">Previous</button></a>
-        <a href="#" class="pager"><button type="submit" class="btn btn-primary btn-lg">Save</button></a>
-        <a href="{% url 'question_detail' quiz_id=question.quiz_id pk=next %}" class="pager"><button type="button"
-          class="btn btn-primary btn-lg">Next</button></a>
+        <div class='d-flex justify-content-between'>
+
+          {% if not previous_disabled %}
+          <div>
+            <a href="{% url 'question_detail' quiz_id=question.quiz_id pk=previous %}" class="pager"><button
+                type="button" class="btn btn-primary btn-lg">Previous</button></a>
+          </div>
+          {% endif %}
+
+          <div>
+            <a href="#" class="pager"><button type="submit" class="btn btn-success btn-lg">Save</button></a>
+          </div>
+
+          {% if not next_disabled %}
+          <div>
+            <a href="{% url 'question_detail' quiz_id=question.quiz_id pk=next %}" class="pager"><button type="button"
+                class="btn btn-primary btn-lg">Next</button></a>
+          </div>
+          {% endif %}
+        </div>
       </div>
 
     </form>
 
+
+    <div class='mt-4'>
+      <form action="{% url 'finish_quiz' pk=question.quiz_id %}" method="post">
+        {% csrf_token %}
+        <a href="#" class="pager"><button type="submit" class="btn btn-danger btn-block">Finish Quiz</button></a>
+      </form>
+    </div>
+
   </div>
 
-  <!-- <form action="">
+</div>
+
+<!-- <form action="">
     <input type="checkbox" id="vehicle1" name="choice_text" value="Bike">
     <label for="vehicle1"> {{choice.choice_text}}</label><br>
     <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
@@ -71,4 +96,4 @@
 
 
 
-  {% endblock content %}
+{% endblock content %}
