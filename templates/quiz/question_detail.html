@@ -50,7 +50,8 @@
         <a href="{% url 'question_detail' quiz_id=question.quiz_id pk=previous %}" class="pager"><button type="button"
             class="btn btn-primary btn-lg">Previous</button></a>
         <a href="#" class="pager"><button type="submit" class="btn btn-primary btn-lg">Save</button></a>
-        <a href="#" class="pager"><button type="button" class="btn btn-primary btn-lg">Next</button></a>
+        <a href="{% url 'question_detail' quiz_id=question.quiz_id pk=next %}" class="pager"><button type="button"
+          class="btn btn-primary btn-lg">Next</button></a>
       </div>
 
     </form>

@@ -1,6 +1,7 @@
 # from django.shortcuts import render
 
 # Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from django.views import View
@@ -51,6 +52,7 @@ class QuestionDetailView(View):
         answered_choice = Answer.objects.filter(
             user_id=request.user.id, question_id=question_id
         ).last()
+        #previous_question =
 
         template_name = "quiz/question_detail.html"
         context = {
@@ -63,9 +65,9 @@ class QuestionDetailView(View):
         return render(request, template_name, context)
 
 
-class AnswerCreateView(View):
+class AnswerCreateView(LoginRequiredMixin,View):
     def post(self, request, *args, **kwargs):
-
+        
         print("CURRENT User", request.user.id)
 
         selected_choice = request.POST.get("answer_choice")
@@ -127,6 +129,31 @@ class AnswerCreateView(View):
             "next": 1,
         }
         return render(request, template_name, context)
+
+
+
+
+
+
+
+    """model= Answer
+    template_name='question_detail.html'
+    fields=('selected_choice')
+    login_url = 'login' 
+
+    def form_valid(self, form):# new
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def dispatch(self, request, *args, **kwargs): # new
+        self.object = self.get_object()
+
+        obj = self.get_object()
+        if obj.author != self.request.user:
+         raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)"""
+
+    
 
         # return render()
 
