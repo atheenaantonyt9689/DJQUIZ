@@ -29,17 +29,33 @@ class FinishQuizView(View):
         quiz = Quiz.objects.get(id=quiz_id)
         template_name = "quiz/finish_quiz.html"
         # question_id_list = [3,5,6,7,10,11]
-        selected_answers = {
-            3: "Trivandrum",
-            5: "Chennai",
-            6: "Belgaum",
-        }
 
+        # find question list
+        # for each question find correct-answer choice_text
+        # create dictionary
+        correct_answers = {}
+        for question in question_set:
+            correct_answers[question.id] = "correct choice text"
+        """
         correct_answers = {
             3: "Trivandrum",
             5: "Chennai",
             6: "Bangalore",
         }
+        """
+        # find question list
+        # for each question find correct-answer choice_text
+        # create dictionary
+        selected_answers = {}
+        for question in question_set:
+            selected_answers[question.id] = "selected choice text"
+        """
+        selected_answers = {
+            3: "Trivandrum",
+            5: "Chennai",
+            6: "Belgaum",
+        }
+        """
 
         context = {"quiz": quiz, "selected_answers": {}, "correct_answers": {}}
         return render(request, template_name, context)
