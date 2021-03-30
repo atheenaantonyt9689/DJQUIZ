@@ -93,6 +93,33 @@ class QuestionDetailView(View):
         ).last()
         # previous_question =
 
+        questions_id_list = [
+            question.id
+            for question in Question.objects.filter(quiz_id=quiz_id).order_by("id")
+        ]
+        # [3,5,6,7,10,11]
+        # question_id = 7
+
+        current_question_index = questions_id_list.index(int(question_id))
+        # 0
+        previous_question_disabled = False
+        previous_question_index = current_question_index - 1
+        if previous_question_index < 0:
+            previous_question_disabled = True
+            previous_question_id = 0
+        else:
+            previous_question_id = questions_id_list[previous_question_index]
+        # -1
+
+        next_question_disabled = False
+        next_question_index = current_question_index + 1
+        if next_question_index >= len(questions_id_list):
+            next_question_disabled = True
+            next_question_id = 0
+        else:
+            next_question_id = questions_id_list[next_question_index]
+        # 4
+
         template_name = "quiz/question_detail.html"
         context = {
             "quiz": quiz,
@@ -121,7 +148,7 @@ class AnswerCreateView(LoginRequiredMixin, View):
             messages.warning(request, "Please select atleast one choice!")
             return redirect("question_detail", quiz_id=quiz_id, pk=question_id)
 
-        quiz = Quiz.objects.get(id=quiz_id)
+        # quiz = Quiz.objects.get(id=quiz_id)
         # question = Question.objects.get(id=question_id)
 
         print("Selected Choice", selected_choice, ", ")
@@ -145,7 +172,6 @@ class AnswerCreateView(LoginRequiredMixin, View):
             qindex = questions.index(int(question_id))
             print("qIndex", qindex)
             if qindex == len(questions) - 1:
-                last_question = True
                 next_question_id = question_id
             else:
                 next_index = qindex + 1
