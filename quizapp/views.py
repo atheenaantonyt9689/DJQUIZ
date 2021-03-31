@@ -17,12 +17,14 @@ class HomePageView(ListView):
     template_name = "quiz/home.html"
 
 
-class QuizDetailView(DetailView):
+class QuizDetailView((LoginRequiredMixin,DetailView):
     model = Quiz
     template_name = "quiz/quiz_detail.html"
+    login_url = 'registration/login'
 
 
-class AltQuizDetailView(View):
+class AltQuizDetailView((LoginRequiredMixin,View):
+    login_url = 'registration/login'
     def get(self, request, *args, **kwargs):
         print("args, kwargs", args, kwargs)
         print("request.GET", request.GET)
@@ -36,7 +38,7 @@ class AltQuizDetailView(View):
         return render(request, template_name, context)
 
 
-class QuestionDetailView(View):
+class QuestionDetailView((LoginRequiredMixin,View):
     # model = Question
     # template_name = "quiz/question_detail.html"
 
@@ -52,22 +54,52 @@ class QuestionDetailView(View):
         answered_choice = Answer.objects.filter(
             user_id=request.user.id, question_id=question_id
         ).last()
-        #previous_question =
+
+    
+        questions = [
+            question.id
+            for question in Question.objects.filter(quiz_id=quiz_id).order_by("id")
+        ]
+        print("All Questions of Quiz:", quiz_id, "##", questions)
+
+        previous_question_id = question_id
+        first_question = False
+
+        try:
+            qindex = questions.index(int(question_id))
+            print("qIndex", qindex)
+            if qindex == len(questions) -1:
+                first_question = True
+                previous_question_id = question_id
+            else:
+                previous_index = qindex -1
+                previous_question_id = questions[previous_index]
+        except ValueError:
+            print("valueerrordefrefrfrfr")
+
+        print("Previous question id", previous_question_id)
+
+        previous_question = Question.objects.get(id=previous_question_id)"""
+
+        
 
         template_name = "quiz/question_detail.html"
         context = {
             "quiz": quiz,
             "question": question,
             "answered_choice": answered_choice,
-            "previous": 1,  # TODO
+            "previous":1,#previous_question,  # TODO
             "next": 1,  # TODO
         }
+
+        print("my workkkkkk",context)
         return render(request, template_name, context)
+       
 
 
-class AnswerCreateView(LoginRequiredMixin,View):
+class AnswerCreateView(View):
     def post(self, request, *args, **kwargs):
-        
+
         print("CURRENT User", request.user.id)
 
         selected_choice = request.POST.get("answer_choice")
@@ -125,35 +157,10 @@ class AnswerCreateView(LoginRequiredMixin,View):
             "quiz": quiz,
             "question": next_question,
             "last_question": last_question,
-            "previous": 1,
+            "previous":1,#previous_question,
             "next": 1,
         }
         return render(request, template_name, context)
-
-
-
-
-
-
-
-    """model= Answer
-    template_name='question_detail.html'
-    fields=('selected_choice')
-    login_url = 'login' 
-
-    def form_valid(self, form):# new
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-    def dispatch(self, request, *args, **kwargs): # new
-        self.object = self.get_object()
-
-        obj = self.get_object()
-        if obj.author != self.request.user:
-         raise PermissionDenied
-        return super().dispatch(request, *args, **kwargs)"""
-
-    
 
         # return render()
 
